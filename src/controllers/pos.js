@@ -19,22 +19,13 @@ module.exports = {
       console.log(error)
     }
   },
-  limitPage: async (request, response) => {
-    try {
-      const limit = request.params.limit
-      const result = await posModel.limitPage(limit)
-      response.json(result)
-    } catch (error) {
-      console.log(error)
-    }
-  },
   insertData: async (request, response) => {
     try {
       const data = {
         name: request.body.name,
         description: request.body.description,
         category: request.body.category,
-        image: request.body.image,
+        image: request.file.path,
         price: request.body.price,
         create_at: new Date()
       }

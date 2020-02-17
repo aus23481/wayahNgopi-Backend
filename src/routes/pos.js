@@ -1,14 +1,24 @@
 const express = require('express')
 const Route = express.Router()
+const multer = require('multer')
 
+const { getAll, insertData, updateData, deleteData } = require('../controllers/pos')
 
-const {getAll,insertData,updateData,deleteData,limitPage} = require('../controllers/pos')
+const storage = multer.diskStorage({
+  destination: function (request, file, cb) {
+    cb(null, './src/uploads')
+  },
+  filename: function (request, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 Route
   .get('/', getAll)
   // .get('/:productId', getDetail)
-  .get('/:limit', limitPage)
-  .post('/', insertData)
+  .post('/', upload.single('image'), insertData)
   .patch('/:productId', updateData)
   .delete('/:productId', deleteData)
 

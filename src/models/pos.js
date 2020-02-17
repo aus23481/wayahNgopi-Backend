@@ -1,9 +1,9 @@
 const connection = require('../config/koneksi')
 
 module.exports = {
-    getAll: (searchName, sortBy) => {
-      return new Promise((resolve, reject) => {
-        connection.query(`SELECT
+  getAll: (searchName, sortBy) => {
+    return new Promise((resolve, reject) => {
+      connection.query(`SELECT
         product.name,
         product.description,
         category.name as category_name,
@@ -18,11 +18,11 @@ module.exports = {
         product.name LIKE '%${searchName}%' AND
         product.category = category.id 
         ORDER BY '${sortBy}'`, (error, result) => {
-          if (error) reject(new Error(error))
-          resolve(result)
-        })
+        if (error) reject(new Error(error))
+        resolve(result)
       })
-    },
+    })
+  },
   insertData: (data) => {
     return new Promise((resolve, reject) => {
       connection.query('INSERT INTO product SET ?', data, (error, result) => {
@@ -42,8 +42,8 @@ module.exports = {
 
   limitPage: (limit) => {
     return new Promise((resolve, reject) => {
-      let totalData = connection.query('SELECT count (*) FROM product')
-      let totalPages = Math.ceil(totalData / limit)
+      // const totalData = connection.query('SELECT count (*) FROM product')
+      // const totalPages = Math.ceil(totalData / limit)
 
       connection.query(`SELECT * FROM product LIMIT ${limit}`, (error, result) => {
         if (error) reject(new Error(error))
