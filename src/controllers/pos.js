@@ -1,22 +1,25 @@
 const posModel = require('../models/pos')
+const helpers = require('../helpers')
 module.exports = {
   getAll: async (request, response) => {
     try {
       const searchName = request.query.name || ''
-      const sortBy = request.headers.sortBy || ''
-      const result = await posModel.getAll(searchName)
-      response.json(result)
+      const sortBy = request.query.sortBy || 'id'
+      const result = await posModel.getAll(searchName, sortBy)
+      helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
+      helpers.errorResponse(response, 400, 'Internal server error')
     }
   },
   getDetail: async (request, response) => {
     try {
       const productId = request.params.productId
       const result = await posModel.getDetail(productId)
-      response.json(result)
+      helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
+      helpers.errorResponse(response, 400, 'Internal server error')
     }
   },
   insertData: async (request, response) => {
@@ -25,14 +28,15 @@ module.exports = {
         name: request.body.name,
         description: request.body.description,
         category: request.body.category,
-        image: request.file.path,
+        image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
         create_at: new Date()
       }
       const result = await posModel.insertData(data)
-      response.json(result)
+      helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
+      helpers.errorResponse(response, 400, 'Internal server error')
     }
   },
   updateData: async (request, response) => {
@@ -47,18 +51,20 @@ module.exports = {
       }
       const productId = request.params.productId
       const result = await posModel.updateData(data, productId)
-      response.json(result)
+      helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
+      helpers.errorResponse(response, 400, 'Internal server error')
     }
   },
   deleteData: async (request, response) => {
     try {
       const productId = request.params.productId
       const result = await posModel.deleteData(productId)
-      response.json(result)
+      helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
+      helpers.errorResponse(response, 400, 'Internal server error')
     }
   }
 

@@ -14,10 +14,12 @@ module.exports = {
         FROM 
         category,
         product
-        WHERE 
-        product.name LIKE '%${searchName}%' AND
+        WHERE
         product.category = category.id 
-        ORDER BY '${sortBy}'`, (error, result) => {
+        AND
+        product.name LIKE '%${searchName}%'
+        ORDER BY product.${sortBy}
+        `, (error, result) => {
         if (error) reject(new Error(error))
         resolve(result)
       })
