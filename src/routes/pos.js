@@ -1,6 +1,7 @@
 const express = require('express')
 const Route = express.Router()
 const multer = require('multer')
+const { authentication, authorization } = require('../helpers/auth')
 const { getAll, insertData, updateData, deleteData } = require('../controllers/pos')
 
 const storage = multer.diskStorage({
@@ -34,7 +35,7 @@ const upload = multer({
 })
 
 Route
-  .get('/', getAll)
+  .get('/', authentication, authorization, getAll)
   // .get('/:productId', getDetail)
   .post('/', upload.single('image'), insertData)
   .patch('/:productId', updateData)
