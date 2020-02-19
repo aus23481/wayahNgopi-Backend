@@ -3,9 +3,12 @@ const helpers = require('../helpers')
 module.exports = {
   getAll: async (request, response) => {
     try {
+      const limit = request.headers.limit || 15
+      const activePage = request.query.page || 1
       const searchName = request.query.name || ''
       const sortBy = request.query.sortBy || 'id'
-      const result = await posModel.getAll(searchName, sortBy)
+      const asc = request.query.sort || 'ASC'
+      const result = await posModel.getAll(limit, activePage, searchName, sortBy, asc)
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
@@ -45,7 +48,7 @@ module.exports = {
         name: request.body.name,
         description: request.body.description,
         category: request.body.category,
-        image: request.body.image,
+        image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
         update_at: new Date()
       }

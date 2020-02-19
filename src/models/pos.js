@@ -1,9 +1,13 @@
 const connection = require('../config/koneksi')
 
 module.exports = {
-  getAll: (searchName, sortBy) => {
+  getAll: (limit, activePage, searchName, sortBy, asc) => {
+    // const totalData = connection.query('SELECT count(*) FROM product')
+    // const totalPages = Math.ceil(totalData / limit)
+    const firstData = ((limit * activePage) - limit)
     return new Promise((resolve, reject) => {
       connection.query(`SELECT
+      product.id,
         product.name,
         product.description,
         category.name as category_name,
@@ -18,7 +22,8 @@ module.exports = {
         product.category = category.id 
         AND
         product.name LIKE '%${searchName}%'
-        ORDER BY product.${sortBy}
+        ORDER BY product.${sortBy} ${asc}
+        LIMIT ${firstData},${limit}
         `, (error, result) => {
         if (error) reject(new Error(error))
         resolve(result)

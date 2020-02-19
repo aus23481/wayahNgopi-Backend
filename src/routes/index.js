@@ -4,6 +4,6 @@ const posRouter = require('./pos')
 
 Route
   .use('/pos', posRouter)
-  .use('/uploads', express.static("./uploads"))
+  .use('/uploads', express.static('./uploads'))
 
 module.exports = Route

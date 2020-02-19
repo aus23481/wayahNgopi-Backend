@@ -1,19 +1,37 @@
 const express = require('express')
 const Route = express.Router()
 const multer = require('multer')
-
 const { getAll, insertData, updateData, deleteData } = require('../controllers/pos')
 
 const storage = multer.diskStorage({
   destination: function (request, file, cb) {
-    cb(null, './src/uploads')
+    cb(null, './uploads')
   },
+
   filename: function (request, file, cb) {
     cb(null, file.originalname)
   }
 })
 
-const upload = multer({ storage: storage })
+const fileFilter = (request, file, cb) => {
+  if (
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg' ||
+    file.mimetype === 'image/jpeg'
+  ) {
+    cb(null, true)
+  } else {
+    cb(new Error({ message: 'File format should be PNG,JPG,JPEG' }), false)
+  }
+}
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+})
 
 Route
   .get('/', getAll)

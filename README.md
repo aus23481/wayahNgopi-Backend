@@ -45,6 +45,7 @@ $ npm install body-parser
 $ npm install mysql
 $ npm install dotenv
 $ npm install jsonwebtoken
+$ npm install cors
 ```
 ### Create Environment Variable
 ```bash
@@ -57,10 +58,10 @@ DB_USER = "YOUR USER"
 DB_PASSWORD = "YOUR PASSWORD"
 DB_NAME = "YOUR DATABASENAME"
 
-# JWT_KEY = "secret key"
-# HEADERS_SECRET = ""
-# REDIS_KEY=""
-# PORT = Your Port
+JWT_KEY = "secret key"
+HEADERS_SECRET = ""
+REDIS_KEY=""
+PORT = Your Port
 ```
 ### Start Development Server
 ```bash
