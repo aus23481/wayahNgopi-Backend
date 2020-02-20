@@ -2,7 +2,7 @@ const express = require('express')
 const Route = express.Router()
 const multer = require('multer')
 const { authentication, authorization } = require('../helpers/auth')
-const { getAll, insertData, updateData, getDetail, deleteData } = require('../controllers/pos')
+const { getAll, insertData, updateData, getDetail, deleteData } = require('../controllers/product')
 
 const storage = multer.diskStorage({
   destination: function (request, file, cb) {
@@ -38,7 +38,7 @@ Route
   .get('/', getAll)
   .get('/:productId', authentication, authorization, getDetail)
   .post('/', upload.single('image'), insertData)
-  .patch('/:productId', updateData)
+  .patch('/:productId', upload.single('image'), updateData)
   .delete('/:productId', deleteData)
 
 module.exports = Route

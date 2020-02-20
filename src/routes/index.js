@@ -1,10 +1,10 @@
 const express = require('express')
 const Route = express.Router()
-const posRouter = require('./pos')
+const posRouter = require('./product')
 const userRoute = require('./user')
 
 Route
-  .use('/pos', posRouter)
+  .use('/product', posRouter)
   .use('/user', userRoute)
   .use('/uploads', express.static('./uploads'))
 

@@ -1,4 +1,4 @@
-const posModel = require('../models/pos')
+const productModel = require('../models/product')
 const helpers = require('../helpers')
 module.exports = {
   getAll: async (request, response) => {
@@ -7,8 +7,8 @@ module.exports = {
       const activePage = request.query.page || 1
       const searchName = request.query.name || ''
       const sortBy = request.query.sortBy || 'id'
-      const asc = request.query.sort || 'ASC'
-      const result = await posModel.getAll(limit, activePage, searchName, sortBy, asc)
+      const sort = request.query.sort || 'ASC'
+      const result = await productModel.getAll(limit, activePage, searchName, sortBy, sort)
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
@@ -18,7 +18,7 @@ module.exports = {
   getDetail: async (request, response) => {
     try {
       const productId = request.params.productId
-      const result = await posModel.getDetail(productId)
+      const result = await productModel.getDetail(productId)
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
@@ -35,7 +35,7 @@ module.exports = {
         price: request.body.price,
         create_at: new Date()
       }
-      const result = await posModel.insertData(data)
+      const result = await productModel.insertData(data)
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
@@ -53,7 +53,7 @@ module.exports = {
         update_at: new Date()
       }
       const productId = request.params.productId
-      const result = await posModel.updateData(data, productId)
+      const result = await productModel.updateData(data, productId)
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
@@ -63,7 +63,7 @@ module.exports = {
   deleteData: async (request, response) => {
     try {
       const productId = request.params.productId
-      const result = await posModel.deleteData(productId)
+      const result = await productModel.deleteData(productId)
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)

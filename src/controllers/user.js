@@ -13,7 +13,7 @@ module.exports = {
         email: request.body.email,
         salt: hashPassword.salt,
         password: hashPassword.passwordHash,
-        created_at: new Date()
+        create_at: new Date()
       }
       const result = await userModel.register(data)
       response.json(result)
@@ -35,7 +35,7 @@ module.exports = {
       const token = JWT.sign({
         email: dataUser.email,
         id: dataUser.id
-      }, JWT_KEY, { expiresIn: '1h' })
+      }, JWT_KEY, { expiresIn: '12h' })
 
       delete dataUser.salt
       delete dataUser.password
