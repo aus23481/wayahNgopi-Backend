@@ -1,4 +1,4 @@
-const connection = require('../config/koneksi')
+const connection = require('../configs/koneksi')
 
 module.exports = {
   register: (data) => {

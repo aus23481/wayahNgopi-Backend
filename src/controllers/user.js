@@ -1,7 +1,7 @@
 const userModel = require('../models/user')
 const helper = require('../helpers/')
 const JWT = require('jsonwebtoken')
-const { JWT_KEY } = require('../config')
+const { JWT_KEY } = require('../configs')
 
 module.exports = {
   register: async (request, response) => {

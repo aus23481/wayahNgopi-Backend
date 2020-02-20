@@ -1,4 +1,4 @@
-const { port } = require('./src/config')
+const { port } = require('./src/configs')
 const express = require('express')
 const app = express()
 const logger = require('morgan')
