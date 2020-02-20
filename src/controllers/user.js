@@ -12,8 +12,8 @@ module.exports = {
         name: request.body.name,
         email: request.body.email,
         salt: hashPassword.salt,
-        password: hashPassword.passwordHash
-        // created_at: new Date()
+        password: hashPassword.passwordHash,
+        created_at: new Date()
       }
       const result = await userModel.register(data)
       response.json(result)
