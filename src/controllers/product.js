@@ -1,14 +1,24 @@
 const productModel = require('../models/product')
 const helpers = require('../helpers')
+const redisCache = require('../helpers/rediscache')
 module.exports = {
   getAll: async (request, response) => {
     try {
-      const limit = request.headers.limit || 15
+      const limit = request.query.limit || 15
       const activePage = request.query.page || 1
       const searchName = request.query.name || ''
       const sortBy = request.query.sortBy || 'id'
       const sort = request.query.sort || 'ASC'
       const result = await productModel.getAll(limit, activePage, searchName, sortBy, sort)
+
+      const key = `get-all-book-${searchName}`
+      const resultCache = await redisCache.get(key)
+      if (resultCache) helpers.response(response, 200, resultCache)
+
+      if (resultCache === null) {
+        const result = await productModel.getAll(limit, activePage, searchName, sortBy, sort)
+        await redisCache.set(key, result)
+      }
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
