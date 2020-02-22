@@ -11,7 +11,7 @@ module.exports = {
       const sort = request.query.sort || 'ASC'
       const result = await productModel.getAll(limit, activePage, searchName, sortBy, sort)
 
-      const key = `get-all-book-${searchName}`
+      const key = `get-all-product-${searchName}`
       const resultCache = await redisCache.get(key)
       if (resultCache) helpers.response(response, 200, resultCache)
 
@@ -22,7 +22,7 @@ module.exports = {
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
-      helpers.errorResponse(response, 400, 'Internal server error')
+      helpers.response(response, 400, 'Internal server error')
     }
   },
   getDetail: async (request, response) => {
@@ -60,6 +60,7 @@ module.exports = {
         category: request.body.category,
         image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
+        quantity: request.body.quantity,
         update_at: new Date()
       }
       const productId = request.params.productId
