@@ -13,7 +13,7 @@ module.exports = {
         category.name as category_name,
         product.image,
         product.price,
-        product.quantity,
+        product.stock,
         product.create_at,
         product.update_at
         FROM 

@@ -43,6 +43,7 @@ module.exports = {
         category: request.body.category,
         image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
+        stock: request.body.stock,
         create_at: new Date()
       }
       const result = await productModel.insertData(data)
@@ -60,7 +61,7 @@ module.exports = {
         category: request.body.category,
         image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
-        quantity: request.body.quantity,
+        stock: request.body.stock,
         update_at: new Date()
       }
       const productId = request.params.productId
