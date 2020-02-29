@@ -12,7 +12,7 @@ module.exports = {
       passwordHash: value
     }
   },
-  response: (response, status, result, pagination) => {
+  customResponse: (response, status, result, pagination) => {
     var page = []
     var data = {}
 
@@ -27,12 +27,12 @@ module.exports = {
     return response.status(data.status).json(data)
   },
 
-  // response: (response, status, data) => {
-  //   const result = {}
-  //   result.status = status || 200
-  //   result.result = data
-  //   return response.status(result.status).json(result)
-  // },
+  response: (response, status, data) => {
+    const result = {}
+    result.status = status || 200
+    result.result = data
+    return response.status(result.status).json(result)
+  },
   cutomErrorResult: (response, status, message) => {
     const result = {}
     result.status = status || 400

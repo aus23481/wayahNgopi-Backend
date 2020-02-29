@@ -16,9 +16,12 @@ module.exports = {
 
       const totalData = await productModel.countData(searchName, category)
       const totalPages = Math.ceil(totalData / limit)
+      const pager ={
+        totalPages
+    }
       const result = await productModel.getAll(searchName, pagination, category)
 
-      helpers.response(response, 200, result, totalPages)
+      helpers.customResponse(response, 200, result, pager)
     } catch (error) {
       console.log(error)
       helpers.response(response, 400, 'Internal server error')
@@ -49,7 +52,7 @@ module.exports = {
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
-      helpers.errorResponse(response, 400, 'Internal server error')
+      helpers.response(response, 200, result)
     }
   },
   updateData: async (request, response) => {
