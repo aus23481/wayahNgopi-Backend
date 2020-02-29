@@ -36,7 +36,7 @@ const upload = multer({
 
 Route
   .get('/', getAll)
-  .get('/:productId', authentication, authorization, getDetail)
+  .get('/:productId', getDetail)
   .post('/', upload.single('image'), insertData)
   .patch('/:productId', upload.single('image'), updateData)
   .delete('/:productId', deleteData)

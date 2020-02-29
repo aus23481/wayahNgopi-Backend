@@ -1,25 +1,24 @@
 const productModel = require('../models/product')
 const helpers = require('../helpers')
-const redisCache = require('../helpers/rediscache')
+// const redisCache = require('../helpers/rediscache')
 module.exports = {
   getAll: async (request, response) => {
     try {
-      const limit = request.query.limit || 15
+      const category = request.query.category || ''
+      const limit = request.query.limit || 666
       const activePage = request.query.page || 1
       const searchName = request.query.name || ''
       const sortBy = request.query.sortBy || 'id'
       const sort = request.query.sort || 'ASC'
-      const result = await productModel.getAll(limit, activePage, searchName, sortBy, sort)
-
-      const key = `get-all-product-${searchName}`
-      const resultCache = await redisCache.get(key)
-      if (resultCache) helpers.response(response, 200, resultCache)
-
-      if (resultCache === null) {
-        const result = await productModel.getAll(limit, activePage, searchName, sortBy, sort)
-        await redisCache.set(key, result)
+      const pagination = {
+        activePage, limit, sortBy, sort
       }
-      helpers.response(response, 200, result)
+
+      const totalData = await productModel.countData(searchName, category)
+      const totalPages = Math.ceil(totalData / limit)
+      const result = await productModel.getAll(searchName, pagination, category)
+
+      helpers.response(response, 200, result, totalPages)
     } catch (error) {
       console.log(error)
       helpers.response(response, 400, 'Internal server error')

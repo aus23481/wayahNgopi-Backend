@@ -1,11 +1,21 @@
 const connection = require('../configs/koneksi')
 
 module.exports = {
-  getAll: (limit, activePage, searchName, sortBy, sort) => {
-    // const totalData = connection.query('SELECT count(*) FROM product')
-    // const totalPages = Math.ceil(totalData / limit)
-    const firstData = ((limit * activePage) - limit)
+  countData: (searchName, cat) => {
     return new Promise((resolve, reject) => {
+      connection.query(`SELECT count(*) as totalData FROM product p
+            LEFT JOIN category tc ON p.category = tc.id
+        WHERE p.name LIKE '%${searchName}%' AND tc.name LIKE '%${cat}%'
+            `, (error, result) => {
+        if (error) reject(new Error(error))
+        resolve(result[0].totalData)
+      })
+    })
+  },
+  getAll: (searchName, pagination, category) => {
+    return new Promise((resolve, reject) => {
+      const totalData = connection.query('SELECT count(*) FROM product')
+      const firstData = ((pagination.limit * pagination.activePage) - pagination.limit)
       connection.query(`SELECT
       product.id,
         product.name,
@@ -22,9 +32,9 @@ module.exports = {
         WHERE
         product.category = category.id 
         AND
-        product.name LIKE '%${searchName}%'
-        ORDER BY product.${sortBy} ${sort}
-        LIMIT ${firstData},${limit}
+        product.name LIKE '%${searchName}%' AND category.name LIKE '%${category}%'
+        ORDER BY product.${pagination.sortBy} ${pagination.sort}
+        LIMIT ${firstData},${pagination.limit}
         `, (error, result) => {
         if (error) reject(new Error(error))
         resolve(result)
@@ -48,17 +58,6 @@ module.exports = {
     })
   },
 
-  limitPage: (limit) => {
-    return new Promise((resolve, reject) => {
-      // const totalData = connection.query('SELECT count (*) FROM product')
-      // const totalPages = Math.ceil(totalData / limit)
-
-      connection.query(`SELECT * FROM product LIMIT ${limit}`, (error, result) => {
-        if (error) reject(new Error(error))
-        resolve(result)
-      })
-    })
-  },
   updateData: (data, productId) => {
     return new Promise((resolve, reject) => {
       connection.query('UPDATE product SET ? WHERE id = ?', [data, productId], (error, result) => {
