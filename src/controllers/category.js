@@ -17,8 +17,9 @@ module.exports = {
         name: request.body.name
       }
       const result = await categoryModel.addCategory(data)
+      data.id = result.insertId
       console.log(data)
-      helpers.response(response, 200, result)
+      helpers.response(response, 200, data)
     } catch (error) {
       console.log(error)
       helpers.cutomErrorResponse(response, 400, 'Internal server error')
@@ -31,7 +32,11 @@ module.exports = {
         name: request.body.name
       }
       const result = await categoryModel.updateCategory(data, categoryId)
-      helpers.response(response, 200, result)
+      const newEditCategory = {
+        ...data,
+        id: categoryId
+      }
+      helpers.response(response, 200, newEditCategory)
     } catch (error) {
       console.log(error)
       helpers.cutomErrorResponse(response, 400, 'Internal server error')
@@ -41,7 +46,8 @@ module.exports = {
     try {
       const categoryId = request.params.categoryId
       const result = await categoryModel.deleteCategory(categoryId)
-      helpers.response(response, 200, result)
+      const newDeleteCategory = parseInt(categoryId)
+      helpers.response(response, 200, newDeleteCategory)
     } catch (error) {
       console.log(error)
       helpers.cutomErrorResponse(response, 400, 'Internal server error')

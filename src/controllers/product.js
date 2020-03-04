@@ -49,6 +49,7 @@ module.exports = {
         create_at: new Date()
       }
       const result = await productModel.insertData(data)
+      data.id = result.insertId
       helpers.response(response, 200, data)
     } catch (error) {
       console.log(error)
