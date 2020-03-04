@@ -16,15 +16,15 @@ module.exports = {
 
       const totalData = await productModel.countData(searchName, category)
       const totalPages = Math.ceil(totalData / limit)
-      const pager ={
+      const pager = {
         totalPages
-    }
+      }
       const result = await productModel.getAll(searchName, pagination, category)
 
       helpers.customResponse(response, 200, result, pager)
     } catch (error) {
       console.log(error)
-      helpers.response(response, 400, 'Internal server error')
+      helpers.cutomErrorResponse(response, 400, 'Internal server error')
     }
   },
   getDetail: async (request, response) => {
@@ -34,7 +34,7 @@ module.exports = {
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
-      helpers.errorResponse(response, 400, 'Internal server error')
+      helpers.cutomErrorResponse(response, 400, 'Internal server error')
     }
   },
   insertData: async (request, response) => {
@@ -49,10 +49,10 @@ module.exports = {
         create_at: new Date()
       }
       const result = await productModel.insertData(data)
-      helpers.response(response, 200, result)
+      helpers.response(response, 200, data)
     } catch (error) {
       console.log(error)
-      helpers.response(response, 200, result)
+      helpers.cutomErrorResponse(response, 400, 'Internal server error')
     }
   },
   updateData: async (request, response) => {
@@ -68,20 +68,24 @@ module.exports = {
       }
       const productId = request.params.productId
       const result = await productModel.updateData(data, productId)
-      helpers.response(response, 200, result)
+      const newProductAfterUpdate = {
+        ...data,
+        id: productId
+      }
+      helpers.response(response, 200, newProductAfterUpdate)
     } catch (error) {
       console.log(error)
-      helpers.errorResponse(response, 400, 'Internal server error')
+      helpers.cutomErrorResponse(response, 400, 'Internal server error')
     }
   },
   deleteData: async (request, response) => {
     try {
       const productId = request.params.productId
       const result = await productModel.deleteData(productId)
-      helpers.response(response, 200, result)
+      helpers.response(response, 200, productId)
     } catch (error) {
       console.log(error)
-      helpers.errorResponse(response, 400, 'Internal server error')
+      helpers.cutomErrorResponse(response, 400, 'Internal server error')
     }
   }
 
