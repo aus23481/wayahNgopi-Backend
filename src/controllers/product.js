@@ -43,7 +43,7 @@ module.exports = {
         name: request.body.name,
         description: request.body.description,
         category: request.body.category,
-        image: `http://localhost:8006/uploads/${request.file.filename}`,
+        // image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
         stock: request.body.stock,
         create_at: new Date()
@@ -62,7 +62,7 @@ module.exports = {
         name: request.body.name,
         description: request.body.description,
         category: request.body.category,
-        image: `http://localhost:8006/uploads/${request.file.filename}`,
+        // image: `http://localhost:8006/uploads/${request.file.filename}`,
         price: request.body.price,
         stock: request.body.stock,
         update_at: new Date()
