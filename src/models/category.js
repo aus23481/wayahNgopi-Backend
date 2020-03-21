@@ -1,4 +1,4 @@
-const con = require('../configs/koneksi')
+const con = require('../configs/connection')
 
 module.exports = {
   getAll: () => {

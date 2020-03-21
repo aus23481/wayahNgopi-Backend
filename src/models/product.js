@@ -1,4 +1,4 @@
-const connection = require('../configs/koneksi')
+const connection = require('../configs/connection')
 
 module.exports = {
   countData: (searchName, cat) => {
