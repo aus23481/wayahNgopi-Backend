@@ -10,7 +10,7 @@ module.exports = {
       var a = 0
       await payment.products.map(e => {
         const data = {
-          id_transaction: payment.id_transaction,
+          idTransaction: payment.idTransaction,
           productId: e.productId,
           stock: e.quantity
         }
@@ -25,6 +25,34 @@ module.exports = {
     } catch (error) {
       console.log(error)
       helpers.cutomErrorResponse(response, 400, 'Internal server error')
+    }
+  },
+  historyTransaction: async (request, response) => {
+    try {
+      const idTransaction = request.params.idTransaction
+      const result = await models.historyTransaction(idTransaction)
+      helpers.response(response, 200, result)
+    } catch (error) {
+      console.log(error)
+      helpers.customErrorResponse(response, 400, 'Internal server error')
+    }
+  },
+  recapitulationTransaction: async (request, response) => {
+    try {
+      const result = await models.recapitulationTransaction()
+      helpers.response(response, 200, result)
+    } catch (error) {
+      console.log(error)
+      helpers.customErrorResponse(response, 400, 'Internal server error')
+    }
+  },
+  weeklyTransaction: async (request, response) => {
+    try {
+      const result = await models.weeklyTransaction()
+      helpers.response(response, 200, result)
+    } catch (error) {
+      console.log(error)
+      helpers.customErrorResponse(response, 400, 'Internal server error')
     }
   }
 }

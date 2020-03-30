@@ -6,9 +6,9 @@ module.exports = {
       connection.query(
         'SELECT * FROM user WHERE email = ?',
         data.email,
-        (result) => {
+        (error, result) => {
           if (result.length > 0) {
-            reject(new Error('User has been added'))
+       reject(new Error(error))
           } else {
             connection.query(
               'INSERT INTO user SET ?',

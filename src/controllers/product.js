@@ -24,7 +24,7 @@ module.exports = {
       helpers.customResponse(response, 200, result, pager)
     } catch (error) {
       console.log(error)
-      helpers.cutomErrorResponse(response, 400, 'Internal server error')
+      helpers.customErrorResponse(response, 400, 'Internal server error')
     }
   },
   getDetail: async (request, response) => {
@@ -34,7 +34,7 @@ module.exports = {
       helpers.response(response, 200, result)
     } catch (error) {
       console.log(error)
-      helpers.cutomErrorResponse(response, 400, 'Internal server error')
+      helpers.customErrorResponse(response, 400, 'Internal server error')
     }
   },
   insertData: async (request, response) => {
@@ -53,7 +53,7 @@ module.exports = {
       helpers.response(response, 200, data)
     } catch (error) {
       console.log(error)
-      helpers.cutomErrorResponse(response, 400, 'Internal server error')
+      helpers.customErrorResponse(response, 400, 'Internal server error')
     }
   },
   updateData: async (request, response) => {
@@ -76,7 +76,7 @@ module.exports = {
       helpers.response(response, 200, newProductAfterUpdate)
     } catch (error) {
       console.log(error)
-      helpers.cutomErrorResponse(response, 400, 'Internal server error')
+      helpers.customErrorResponse(response, 400, 'Internal server error')
     }
   },
   deleteData: async (request, response) => {
@@ -86,7 +86,7 @@ module.exports = {
       helpers.response(response, 200, productId)
     } catch (error) {
       console.log(error)
-      helpers.cutomErrorResponse(response, 400, 'Internal server error')
+      helpers.customErrorResponse(response, 400, 'Internal server error')
     }
   }
 

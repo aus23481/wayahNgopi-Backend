@@ -1,10 +1,9 @@
-const userModel = require('../models/user2')
+const userModel = require('../models/user')
 const helper = require('../helpers')
 const JWT = require('jsonwebtoken')
 const helpers = require('../helpers')
 const { JWT_KEY } = require('../configs')
 const { IP, port } = require('../configs')
-const uuidv4 = require('uuid/v4')
 module.exports = {
   getUser: async (request, response) => {
     try {
@@ -31,7 +30,7 @@ module.exports = {
           password: hashPassword.passwordHash,
           alamat: request.body.alamat,
           salt: hashPassword.salt,
-          status: request.body.status || '2',
+          status: request.body.status || 'cashier',
           updated: new Date()
         }
         const result = await userModel.updateData(data, userId)
@@ -50,7 +49,7 @@ module.exports = {
         password: hashPassword.passwordHash,
         alamat: request.body.alamat,
         salt: hashPassword.salt,
-        status: request.body.status || '2',
+        status: request.body.status || 'cahsier',
         updated: new Date()
       }
       const result = await userModel.updateData(data, userId)
@@ -76,7 +75,6 @@ module.exports = {
 
   register: async (request, response) => {
     try {
-      const id = uuidv4()
       const salt = helper.generateSalt(18)
       const hashPassword = helper.setPassword(request.body.password, salt)
 
@@ -113,7 +111,7 @@ module.exports = {
       helpers.customErrorResponse(
         response,
         400,
-        'Register fail user has been added'
+        'Register fail user has already added'
       )
     }
   },
