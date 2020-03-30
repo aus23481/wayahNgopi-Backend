@@ -55,7 +55,7 @@ module.exports = {
   },
   weeklyTransaction: () => {
     return new Promise((resolve, reject) => {
-      con.query('SELECT SUM(totalPayment) as total, date_added FROM transaction GROUP BY date_added ORDER BY date_added DESC LIMIT 14', (error, result) => {
+      con.query('SELECT SUM(totalPayment) as totalPayment, date_added FROM transaction GROUP BY date_added ORDER BY date_added DESC LIMIT 14', (error, result) => {
         if (error) reject(new Error(error))
         resolve(result)
       })

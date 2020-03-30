@@ -5,6 +5,6 @@ const { payment, weeklyTransaction, recapitulationTransaction, historyTransactio
 Route
   .post('/', payment)
   .get('/weekly', weeklyTransaction)
-  .get('/recapitulation', recapitulationTransaction)
+  .get('/history', recapitulationTransaction)
   .get('/history/:idTransaction', historyTransaction)
 module.exports = Route
