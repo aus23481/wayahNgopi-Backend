@@ -30,7 +30,7 @@ module.exports = {
           password: hashPassword.passwordHash,
           alamat: request.body.alamat,
           salt: hashPassword.salt,
-          status: request.body.status || 'cashier',
+          status: request.body.status || '2',
           updated: new Date()
         }
         const result = await userModel.updateData(data, userId)
@@ -43,7 +43,7 @@ module.exports = {
 
       const data = {
         name: request.body.name,
-        image: `${IP}:${port}/uploads/${request.file.fileName}`,
+        image: `${IP}:${port}/uploads/${request.file.filename}`,
         email: request.body.email,
         username: request.body.username,
         password: hashPassword.passwordHash,
@@ -95,7 +95,7 @@ module.exports = {
         helpers.response(response, 200, data)
       } const data = {
         name: request.body.name,
-        image: `${IP}:${port}/uploads/${request.file.fileName}`,
+        image: `${IP}:${port}/uploads/${request.file.filename}`,
         email: request.body.email,
         username: request.body.username,
         password: hashPassword.passwordHash,

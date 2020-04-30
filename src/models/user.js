@@ -8,7 +8,7 @@ module.exports = {
         data.email,
         (error, result) => {
           if (result.length > 0) {
-       reject(new Error(error))
+            reject(new Error(error))
           } else {
             connection.query(
               'INSERT INTO user SET ?',
