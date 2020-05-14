@@ -37,15 +37,6 @@ Coffee Shop is the task week 1 of Arkademy Bootcamp Bogor. Feel free to use and 
 $ git clone https://github.com/rifkiandriyanto/cofeeshop-with-expressJs-npm
 $ cd coffeeshop
 $ npm install
-$ npm init
-$ npm install express
-$ npm install nodemon
-$ npm install morgan
-$ npm install body-parser
-$ npm install mysql
-$ npm install dotenv
-$ npm install jsonwebtoken
-$ npm install cors
 ```
 ### Create Environment Variable
 ```bash
@@ -59,9 +50,8 @@ DB_PASSWORD = "YOUR PASSWORD"
 DB_NAME = "YOUR DATABASENAME"
 
 JWT_KEY = "secret key"
-HEADERS_SECRET = ""
-REDIS_KEY=""
 PORT = Your Port
+IP = Your IP or Domain server
 ```
 ### Start Development Server
 ```bash
