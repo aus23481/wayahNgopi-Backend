@@ -34,8 +34,8 @@ WayahNgopi is point of sale for your choffee shop. Feel free to use and bought m
 ## Installation
 ### Clone
 ```bash
-$ git clone https://github.com/rifkiandriyanto/cofeeshop-with-expressJs-npm
-$ cd coffeeshop
+$ git clone https://github.com/rifkiandriyanto/wayahNgopi-Backend
+$ cd wayahNgopi-Backend
 $ npm install
 
 ```
@@ -49,7 +49,6 @@ DB_HOST = "YOUR HOST"
 DB_USER = "YOUR USER"
 DB_PASSWORD = "YOUR PASSWORD"
 DB_DATABASE = "YOUR DATABASENAME"
-
 JWT_KEY = "secret key"
 PORT = Your Port
 DB_IP = Your IP
@@ -78,4 +77,3 @@ $ npm start
 © [Rifki Andriyanto](https://github.com/rifkiandriyanto/ " Rifki Andriyanto")
 
 ---
-
