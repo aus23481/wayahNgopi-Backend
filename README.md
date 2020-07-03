@@ -1,8 +1,7 @@
 ![](https://img.shields.io/badge/Code%20Style-Standard-yellow.svg)
 ![](https://img.shields.io/badge/Dependencies-Express-green.svg)
-![](https://img.shields.io/badge/License-Beerware-yellowgreen.svg)
 
-# Coffee Shop with Express Npm
+# WayahNgopi Backend
 
 ---
 
@@ -18,7 +17,7 @@
 
 ## Introduction
 
-Coffee Shop is the task week 1 of Arkademy Bootcamp Bogor. Feel free to use and bought me coffee and cigarettes. Cheers.
+WayahNgopi is point of sale for your choffee shop. Feel free to use and bought me coffee and cigarettes. Cheers.
 
 ---
 
@@ -27,6 +26,7 @@ Coffee Shop is the task week 1 of Arkademy Bootcamp Bogor. Feel free to use and 
 <ol>
   <li>Basic Configuration</li>
   - Node.js - Download and Install [Node.js](https://nodejs.org/en/)
+  - Postman - Download and Install [Postman](www.postman.com)
 </ol>
 
 ---
@@ -37,15 +37,7 @@ Coffee Shop is the task week 1 of Arkademy Bootcamp Bogor. Feel free to use and 
 $ git clone https://github.com/rifkiandriyanto/cofeeshop-with-expressJs-npm
 $ cd coffeeshop
 $ npm install
-$ npm init
-$ npm install express
-$ npm install nodemon
-$ npm install morgan
-$ npm install body-parser
-$ npm install mysql
-$ npm install dotenv
-$ npm install jsonwebtoken
-$ npm install cors
+
 ```
 ### Create Environment Variable
 ```bash
@@ -56,12 +48,11 @@ $ nano .env
 DB_HOST = "YOUR HOST"
 DB_USER = "YOUR USER"
 DB_PASSWORD = "YOUR PASSWORD"
-DB_NAME = "YOUR DATABASENAME"
+DB_DATABASE = "YOUR DATABASENAME"
 
 JWT_KEY = "secret key"
-HEADERS_SECRET = ""
-REDIS_KEY=""
 PORT = Your Port
+DB_IP = Your IP
 ```
 ### Start Development Server
 ```bash
@@ -78,6 +69,7 @@ $ npm start
 - [body-parser](#)
 - [dotenv](#)
 - [jsonwebtoken](#)
+- [cors](#)
 
 ---
 
